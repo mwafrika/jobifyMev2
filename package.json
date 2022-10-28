@@ -1,0 +1,31 @@
+{
+  "name": "jobify-me-css",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+   "start":"nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwafrika/jobifyMe-styled-component.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwafrika/jobifyMe-styled-component/issues"
+  },
+  "homepage": "https://github.com/mwafrika/jobifyMe-styled-component#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
