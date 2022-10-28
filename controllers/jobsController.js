@@ -12,7 +12,7 @@ const deleteJob = async (req, res) => {
   res.send("delete job");
 };
 const showStats = async (req, res) => {
-  res.send("create job");
+  res.send("View Stats");
 };
 
 export { createJob, getAllJobs, updateJob, deleteJob, showStats };
