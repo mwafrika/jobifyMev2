@@ -13,12 +13,12 @@ const initialState = {
 const Register = () => {
   const [values, setValues] = useState(initialState);
 
-  const { showAlert, isLoading } = useAppContext();
+  const { showAlert, isLoading, displayAlert } = useAppContext();
 
   const handleChange = (e) => {
     setValues((prev) => ({
       ...prev,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -30,6 +30,11 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      displayAlert();
+      return;
+    }
   };
 
   return (
