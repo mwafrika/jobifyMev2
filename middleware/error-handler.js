@@ -1,6 +1,12 @@
+import { StatusCodes } from "http-status-codes";
+
 const errorHandlerMiddleware = (error, req, res, next) => {
-  res.status(500).json({
-    message: "There was an error",
+  const defaultError = {
+    StatusCodes: StatusCodes.INTERNAL_SERVER_ERROR,
+    message: "Internal server error",
+  };
+  res.status(defaultError.StatusCodes).json({
+    message: error.message,
   });
 };
 
