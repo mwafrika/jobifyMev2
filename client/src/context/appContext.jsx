@@ -9,15 +9,19 @@ import {
 } from "./actions";
 import axios from "axios";
 
+const token = localStorage.getItem("token");
+const user = localStorage.getItem("user");
+const location = localStorage.getItem("location");
+
 const initialState = {
   isLoading: false,
   showAlert: false,
   alertText: "",
   alertType: "",
-  user: null,
-  userLocation: "",
-  token: null,
-  jobLocation: "",
+  user: user ? JSON.parse(user) : null,
+  userLocation: location || "",
+  token: token,
+  jobLocation: location || "",
 };
 
 const AppContext = React.createContext();
@@ -40,6 +44,18 @@ const AppProvider = ({ children }) => {
     }, 3000);
   };
 
+  const addUserToLocalStorage = ({ user, location, token }) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    localStorage.setItem("location", location);
+  };
+
+  const removeUserFromLocalStorage = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("location");
+  };
+
   const registerUser = async (currentUser) => {
     dispatch({
       type: REGISTER_USER_START,
@@ -58,9 +74,12 @@ const AppProvider = ({ children }) => {
           token,
         },
       });
-      handleClearAlert();
-      console.log(response.data, "check user");
-      // localStorage to be set
+
+      addUserToLocalStorage({
+        user,
+        location,
+        token,
+      });
     } catch (error) {
       dispatch({
         type: REGISTER_USER_ERROR,
@@ -68,8 +87,8 @@ const AppProvider = ({ children }) => {
           message: error.response.data.message,
         },
       });
-      handleClearAlert();
     }
+    handleClearAlert();
   };
 
   return (
