@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import dotenv from "dotenv";
 import "express-async-errors";
@@ -10,9 +11,17 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 dotenv.config();
 const app = express();
 
+// cors() is replaced in the fronted by setting up proxy to the localhost
+
+app.use(cors());
 app.use(express.json());
+
 app.get("/", function (req, res) {
-  res.send("Hello World!");
+  res.json({ message: "Hello World!" });
+});
+
+app.get("/api/v1", function (req, res) {
+  res.json({ message: "API" });
 });
 
 app.use("/api/v1/auth", authRoutes);
