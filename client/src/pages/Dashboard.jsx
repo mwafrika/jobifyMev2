@@ -4,9 +4,8 @@ import axios from "axios";
 const Dashboard = () => {
   const fetchData = async () => {
     try {
-      const data = await fetch("http://localhost:7000/api/v1");
-      const result = await data.json();
-      console.log(result);
+      const data = await axios.get("http://localhost:7000/api/v1");
+      console.log(data.data, "check data in axios");
     } catch (error) {
       console.log(error);
     }

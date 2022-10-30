@@ -7,6 +7,7 @@ import {
   REGISTER_USER_START,
   REGISTER_USER_SUCCESS,
 } from "./actions";
+import axios from "axios";
 
 const initialState = {
   isLoading: false,
@@ -16,9 +17,12 @@ const initialState = {
   user: null,
   userLocation: "",
   token: null,
+  jobLocation: "",
 };
 
 const AppContext = React.createContext();
+const baseUrl = "http://localhost:7000/";
+
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const displayAlert = () => {
@@ -37,7 +41,35 @@ const AppProvider = ({ children }) => {
   };
 
   const registerUser = async (currentUser) => {
-    console.log(currentUser);
+    dispatch({
+      type: REGISTER_USER_START,
+    });
+    try {
+      const response = await axios.post(
+        `${baseUrl}api/v1/auth/register`,
+        currentUser
+      );
+      const { token, user, location } = response.data;
+      dispatch({
+        type: REGISTER_USER_SUCCESS,
+        payload: {
+          user,
+          location,
+          token,
+        },
+      });
+      handleClearAlert();
+      console.log(response.data, "check user");
+      // localStorage to be set
+    } catch (error) {
+      dispatch({
+        type: REGISTER_USER_ERROR,
+        payload: {
+          message: error.response.data.message,
+        },
+      });
+      handleClearAlert();
+    }
   };
 
   return (
