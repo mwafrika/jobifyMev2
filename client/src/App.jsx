@@ -12,7 +12,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>Dashboard</h1>} />
+        <Route path="/" element={<SharedLayouts />}>
+          <Route index element={<Stats />}></Route>
+          <Route path="add-job" element={<AddJob />}></Route>
+          <Route path="all-jobs" element={<AllJobs />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
+        </Route>
         <Route path="/landing" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />
