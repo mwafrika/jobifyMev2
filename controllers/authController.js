@@ -60,9 +60,27 @@ const login = async (req, res) => {
   });
 };
 
-const updateUser = (req, res) => {
-  res.send({
+const updateUser = async (req, res) => {
+  const { name, email, password, lastName, location } = req.body;
+  if (!name || !email || !password || !lastName || !location) {
+    throw new BadRequestError("Please provide all values");
+  }
+  const user = await User.findOne({ _id: req.user.userId });
+
+  user.name = name;
+  user.email = email;
+  user.lastName = lastName;
+  user.location = location;
+
+  await user.save();
+
+  const token = user.createJWT();
+
+  res.status(StatusCodes.OK).json({
     message: "update success",
+    token,
+    user,
+    location: user.location,
   });
 };
 

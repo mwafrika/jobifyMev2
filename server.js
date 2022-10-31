@@ -8,6 +8,7 @@ import jobRoutes from "./routes/jobRoutes.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import morgan from "morgan";
+import auth from "./middleware/auth.js";
 
 dotenv.config();
 const app = express();
@@ -29,7 +30,7 @@ app.get("/api/v1", function (req, res) {
 });
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/jobs", jobRoutes);
+app.use("/api/v1/jobs", auth, jobRoutes);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
