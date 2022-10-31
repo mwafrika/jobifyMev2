@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
+import morgan from "morgan";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 app.get("/", function (req, res) {
   res.json({ message: "Hello World!" });
 });
