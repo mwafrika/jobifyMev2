@@ -14,6 +14,7 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
 } from "./actions";
 import axios from "axios";
 
@@ -29,8 +30,16 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   userLocation: location || "",
   token: token,
-  jobLocation: location || "",
   showSidebar: false,
+  jobLocation: location || "",
+  isEditing: false,
+  editJobId: "",
+  position: "",
+  company: "",
+  jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
+  jobType: "full-time",
+  statusOptions: ["interview", "declined", "pending"],
+  status: "pending",
 };
 
 const AppContext = React.createContext();
@@ -204,6 +213,16 @@ const AppProvider = ({ children }) => {
     handleClearAlert();
   };
 
+  const handleChange = ({ name, value }) => {
+    dispatch({
+      type: HANDLE_CHANGE,
+      payload: {
+        name,
+        value,
+      },
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -214,6 +233,7 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
       }}
     >
       {children}
