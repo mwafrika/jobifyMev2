@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useState } from "react";
+import React, { useReducer, useContext } from "react";
 import reducer from "./reducer";
 import {
   DISPLAY_ALERT,
@@ -11,6 +11,9 @@ import {
   LOGIN_USER_SUCCESS,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from "./actions";
 import axios from "axios";
 
@@ -31,10 +34,39 @@ const initialState = {
 };
 
 const AppContext = React.createContext();
-const baseUrl = "http://localhost:7000/api/v1/";
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const authFetch = axios.create({
+    baseURL: `http://localhost:7000/api/v1/`,
+    headers: {
+      Authorization: `Bearer ${state.token}`,
+    },
+  });
+
+  authFetch.interceptors.request.use(
+    (config) => {
+      // config.headers.common["Authorization"] = `Bearer ${state.token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  authFetch.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response.status === 401) {
+        logoutUser();
+      }
+      return Promise.reject(error);
+    }
+  );
+
   const displayAlert = () => {
     dispatch({
       type: DISPLAY_ALERT,
@@ -67,7 +99,7 @@ const AppProvider = ({ children }) => {
       type: REGISTER_USER_START,
     });
     try {
-      const { data } = await axios.post(`${baseUrl}auth/register`, currentUser);
+      const { data } = await authFetch.post(`/auth/register`, currentUser);
       const { token, user, location } = data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
@@ -99,7 +131,7 @@ const AppProvider = ({ children }) => {
       type: LOGIN_USER_START,
     });
     try {
-      const { data } = await axios.post(`${baseUrl}auth/login`, currentUser);
+      const { data } = await authFetch.post(`/auth/login`, currentUser);
       const { token, user, location } = data;
       dispatch({
         type: LOGIN_USER_SUCCESS,
@@ -119,7 +151,7 @@ const AppProvider = ({ children }) => {
       dispatch({
         type: LOGIN_USER_ERROR,
         payload: {
-          message: error.response.data.message,
+          message: error?.response?.data?.message,
         },
       });
     }
@@ -138,6 +170,40 @@ const AppProvider = ({ children }) => {
 
     removeUserFromLocalStorage();
   };
+
+  const updateUser = async (currentUser) => {
+    dispatch({
+      type: UPDATE_USER_START,
+    });
+    try {
+      const { data } = await authFetch.patch(`/auth/updateUser`, currentUser);
+      const { user, token, location } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: {
+          user,
+          location,
+          token,
+        },
+      });
+      addUserToLocalStorage({
+        user,
+        location,
+        token,
+      });
+    } catch (error) {
+      if (error.response.status !== 401) {
+        dispatch({
+          type: UPDATE_USER_ERROR,
+          payload: {
+            message: error.response.data.message,
+          },
+        });
+      }
+    }
+    handleClearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -147,6 +213,7 @@ const AppProvider = ({ children }) => {
         loginUser,
         toggleSidebar,
         logoutUser,
+        updateUser,
       }}
     >
       {children}

@@ -9,6 +9,9 @@ import {
   LOGIN_USER_SUCCESS,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from "./actions";
 import { initialState } from "./appContext";
 
@@ -107,6 +110,38 @@ const reducer = (state, action) => {
       token: null,
       userLocation: "",
       jobLocation: "",
+    };
+  }
+
+  // update user
+  if (action.type === UPDATE_USER_START) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === UPDATE_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      user: action.payload.user,
+      token: action.payload.token,
+      userLocation: action.payload.location,
+      jobLocation: action.payload.location,
+      showAlert: true,
+      alertType: "success",
+      alertText: "User successfully updated! redirecting...",
+    };
+  }
+
+  if (action.type === UPDATE_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.message,
     };
   }
 

@@ -13,8 +13,6 @@ import auth from "./middleware/auth.js";
 dotenv.config();
 const app = express();
 
-// cors() is replaced in the fronted by setting up proxy to the localhost
-
 app.use(cors());
 app.use(express.json());
 

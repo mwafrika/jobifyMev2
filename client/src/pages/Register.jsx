@@ -62,20 +62,20 @@ const Register = () => {
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
-            handleChange={handleChange}
+            onChange={handleChange}
             value={values.name}
             name="name"
             type="text"
           />
         )}
         <FormRow
-          handleChange={handleChange}
+          onChange={handleChange}
           value={values.email}
           name="email"
           type="email"
         />
         <FormRow
-          handleChange={handleChange}
+          onChange={handleChange}
           value={values.password}
           name="password"
           type="password"
