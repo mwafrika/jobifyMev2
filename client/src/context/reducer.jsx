@@ -13,6 +13,10 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
+  CLEAR_VALUES,
+  CREATE_JOB_ERROR,
+  CREATE_JOB_START,
+  CREATE_JOB_SUCCESS,
 } from "./actions";
 import { initialState } from "./appContext";
 
@@ -150,6 +154,49 @@ const reducer = (state, action) => {
     return {
       ...state,
       [action.payload.name]: action.payload.value,
+    };
+  }
+
+  if (action.type === CLEAR_VALUES) {
+    const initialState = {
+      jobLocation: state.jobLocation || "",
+      isEditing: false,
+      editJobId: "",
+      position: "",
+      company: "",
+      jobType: "full-time",
+      status: "pending",
+    };
+    return {
+      ...state,
+      ...initialState,
+    };
+  }
+
+  if (action.type === CREATE_JOB_START) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === CREATE_JOB_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "New job successfully created",
+    };
+  }
+
+  if (action.type === CREATE_JOB_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.message,
     };
   }
 

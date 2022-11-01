@@ -15,6 +15,10 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
+  CLEAR_VALUES,
+  CREATE_JOB_ERROR,
+  CREATE_JOB_START,
+  CREATE_JOB_SUCCESS,
 } from "./actions";
 import axios from "axios";
 
@@ -223,6 +227,45 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const clearValues = () => {
+    dispatch({
+      type: CLEAR_VALUES,
+    });
+  };
+
+  const createJob = async () => {
+    dispatch({
+      type: CREATE_JOB_START,
+    });
+
+    try {
+      const { jobLocation, jobType, status, position, company } = state;
+      await authFetch.post("/jobs", {
+        jobLocation,
+        jobType,
+        status,
+        position,
+        company,
+      });
+
+      dispatch({
+        type: CREATE_JOB_SUCCESS,
+      });
+      dispatch({
+        type: CLEAR_VALUES,
+      });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_JOB_ERROR,
+        payload: {
+          message: error.response.data.message,
+        },
+      });
+    }
+    handleClearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -234,6 +277,8 @@ const AppProvider = ({ children }) => {
         logoutUser,
         updateUser,
         handleChange,
+        clearValues,
+        createJob,
       }}
     >
       {children}

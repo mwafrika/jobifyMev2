@@ -5,6 +5,7 @@ import { FormRow, FormRowSelect, Alert } from "../../components/index";
 const AddJob = () => {
   const {
     showAlert,
+    isLoading,
     alertText,
     alertType,
     jobLocation,
@@ -18,6 +19,8 @@ const AddJob = () => {
     statusOptions,
     status,
     handleChange,
+    clearValues,
+    createJob,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -26,8 +29,13 @@ const AddJob = () => {
       displayAlert();
       return;
     }
-    console.log(showAlert, "check alert");
+    if (isEditing) {
+      return;
+    }
+
+    createJob();
   };
+
   const handleChangeInput = (e) => {
     handleChange({
       value: e.target.value,
@@ -79,8 +87,19 @@ const AddJob = () => {
               className="btn btn-block submit-btn"
               type="submit"
               onClick={handleSubmit}
+              disabled={isLoading}
             >
               {isEditing ? "save changes" : "add job"}
+            </button>
+            <button
+              className="btn btn-block clear-btn"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                clearValues();
+              }}
+            >
+              clear
             </button>
           </div>
         </div>
