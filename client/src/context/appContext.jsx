@@ -19,6 +19,8 @@ import {
   CREATE_JOB_ERROR,
   CREATE_JOB_START,
   CREATE_JOB_SUCCESS,
+  GET_JOBS_START,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 import axios from "axios";
 
@@ -44,6 +46,10 @@ const initialState = {
   jobType: "full-time",
   statusOptions: ["interview", "declined", "pending"],
   status: "pending",
+  jobs: [],
+  totalJobs: 0,
+  numOfPages: 1,
+  page: 1,
 };
 
 const AppContext = React.createContext();
@@ -266,6 +272,26 @@ const AppProvider = ({ children }) => {
     handleClearAlert();
   };
 
+  const getJobs = async () => {
+    dispatch({
+      type: GET_JOBS_START,
+    });
+
+    try {
+      const { data } = await authFetch.get("/jobs");
+      const { jobs, numOfPages, totalJobs } = data;
+      dispatch({
+        type: GET_JOBS_SUCCESS,
+        payload: { jobs, numOfPages, totalJobs },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error.response);
+      logoutUser();
+    }
+    handleClearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -279,6 +305,7 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         createJob,
+        getJobs,
       }}
     >
       {children}
