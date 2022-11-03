@@ -19,6 +19,7 @@ import {
   CREATE_JOB_SUCCESS,
   GET_JOBS_START,
   GET_JOBS_SUCCESS,
+  SET_EDIT_JOB,
 } from "./actions";
 import { initialState } from "./appContext";
 
@@ -217,6 +218,23 @@ const reducer = (state, action) => {
       jobs: action.payload.jobs,
       numOfPages: action.payload.numOfPages,
       totalJobs: action.payload.totalJobs,
+      showAlert: false,
+    };
+  }
+
+  if (action.type === SET_EDIT_JOB) {
+    const job = state.jobs.find((job) => job._id === action.payload.id);
+    console.log(state.jobs, "check job status");
+    const { jobLocation, jobType, status, company, position, _id } = job;
+    return {
+      ...state,
+      isEditing: true,
+      editJobId: _id,
+      jobLocation,
+      jobType,
+      status,
+      company,
+      position,
     };
   }
 

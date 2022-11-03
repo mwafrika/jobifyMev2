@@ -25,3 +25,5 @@ export const CREATE_JOB_ERROR = "CREATE_JOB_ERROR";
 
 export const GET_JOBS_START = "GET_JOBS_START";
 export const GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS";
+
+export const SET_EDIT_JOB = "SET_EDIT_JOB";

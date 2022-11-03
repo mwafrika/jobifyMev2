@@ -21,6 +21,7 @@ import {
   CREATE_JOB_SUCCESS,
   GET_JOBS_START,
   GET_JOBS_SUCCESS,
+  SET_EDIT_JOB,
 } from "./actions";
 import axios from "axios";
 
@@ -292,6 +293,21 @@ const AppProvider = ({ children }) => {
     handleClearAlert();
   };
 
+  const setEditJob = (id) => {
+    dispatch({
+      type: SET_EDIT_JOB,
+      payload: { id },
+    });
+  };
+
+  const editJob = () => {
+    console.log("Edit job");
+  };
+
+  const deleteJob = (id) => {
+    console.log(id);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -306,6 +322,9 @@ const AppProvider = ({ children }) => {
         clearValues,
         createJob,
         getJobs,
+        setEditJob,
+        deleteJob,
+        editJob,
       }}
     >
       {children}
