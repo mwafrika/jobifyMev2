@@ -1,1 +1,1 @@
-# jobifyMe-styled-component
+# jobifyMe using styled-component
