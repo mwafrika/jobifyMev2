@@ -1,1 +1,1 @@
-# JobifyMe using styled-component and React.js
+# Huntify using styled-component and React.js
