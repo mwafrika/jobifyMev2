@@ -19,6 +19,8 @@ const JobsContainer = () => {
     );
   }
 
+  console.log('jobs', jobs)
+
   if (jobs.length === 0) {
     return (
       <Wrapper>
