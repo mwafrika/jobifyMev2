@@ -30,7 +30,7 @@ const updateJob = async (req, res) => {
 
   const job = await Job.findOne({ _id: jobId });
   if (!job) {
-    throw new NotFoundError("No job with id " + jobId);
+    throw new NotFoundError(`No job with id ${jobId}`);
   }
   checkPermissions(req.user, job.createdBy);
 
@@ -42,7 +42,15 @@ const updateJob = async (req, res) => {
 };
 
 const deleteJob = async (req, res) => {
-  res.send("delete job");
+  const { id: jobId } = req.params;
+  const job = await Job.findOne({ _id: jobId });
+
+  if (!job) {
+    throw new NotFoundError(`No job with id ${jobId}`);
+  }
+  checkPermissions(req.user, job.createdBy);
+  await job.remove();
+  res.status(StatusCodes.OK).json({ message: "Job was successfully deleted" });
 };
 const showStats = async (req, res) => {
   res.send("View Stats");
