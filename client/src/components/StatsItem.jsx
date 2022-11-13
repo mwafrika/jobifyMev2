@@ -1,10 +1,17 @@
 import React from "react";
+import Wrapper from "../assets/wrappers/StatItem";
 
-const StatsItem = ({ title }) => {
+const StatsItem = ({ title, bcg, icon, count, color }) => {
+  console.log(title, bcg, "stats item");
+
   return (
-    <div>
-      <h1>Single Item</h1>
-    </div>
+    <Wrapper bcg={bcg} color={color}>
+      <header>
+        <span className="count">{count}</span>
+        <div className="icon">{icon}</div>
+      </header>
+      <h5 className="title">{title}</h5>
+    </Wrapper>
   );
 };
 

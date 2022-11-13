@@ -1,12 +1,8 @@
-import { useEffect } from "react";
-import { useAppContext, initialState } from "../context/AppContext";
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from "react-icons/fa";
 import Wrapper from "../assets/Wrappers/StatsContainer";
 import StatsItem from "./StatsItem";
 
 const StatsContainer = ({ stats }) => {
-  console.log(stats.interview, "Check value state");
-
   const defaultStats = [
     {
       title: "pending applications",
