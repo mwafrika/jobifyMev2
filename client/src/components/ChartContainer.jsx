@@ -6,10 +6,15 @@ import Wrapper from "../assets/Wrappers/ChartsContainer";
 
 const ChartContainer = () => {
   const { monthlyApplications: data } = useAppContext();
+  const [barChat, setBarChat] = useState(true);
+
   return (
     <Wrapper>
-      <BarChart data={data} />
-      <AreaChart data={data} />
+      <h4>monthly applications</h4>
+      <button type="button" onClick={() => setBarChat(!barChat)}>
+        {barChat ? "Area Chart" : "Bar Chart"}
+      </button>
+      {barChat ? <BarChart data={data} /> : <AreaChart data={data} />}
     </Wrapper>
   );
 };
