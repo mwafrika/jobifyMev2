@@ -293,9 +293,7 @@ const AppProvider = ({ children }) => {
         type: GET_JOBS_SUCCESS,
         payload: { jobs, numOfPages, totalJobs },
       });
-      console.log(data);
     } catch (error) {
-      console.log(error.response);
       logoutUser();
     }
     handleClearAlert();
@@ -361,7 +359,6 @@ const AppProvider = ({ children }) => {
     });
     try {
       const { data } = await authFetch("/jobs/stats");
-      console.log(data.defaultValues, "data");
 
       dispatch({
         type: SHOW_STATS_SUCCESS,
@@ -371,8 +368,7 @@ const AppProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      console.log(error.response);
-      // logoutUser();
+      logoutUser();
     }
     handleClearAlert();
   };

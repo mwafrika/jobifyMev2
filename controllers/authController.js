@@ -75,7 +75,6 @@ const updateUser = async (req, res) => {
   await user.save();
 
   const token = user.createJWT();
-  console.log(process.env.JWT_LIFETIME);
   res.status(StatusCodes.OK).json({
     message: "update success",
     token,

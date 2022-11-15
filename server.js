@@ -9,26 +9,37 @@ import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import morgan from "morgan";
 import auth from "./middleware/auth.js";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+import helmet from "helmet";
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 dotenv.config();
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 app.use(cors());
 app.use(express.json());
+
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
-app.get("/", function (req, res) {
-  res.json({ message: "Hello World!" });
-});
-
-app.get("/api/v1", function (req, res) {
-  res.json({ message: "API" });
-});
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", auth, jobRoutes);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+});
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 

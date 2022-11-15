@@ -9,6 +9,7 @@ const JobsContainer = () => {
 
   useEffect(() => {
     getJobs();
+    // eslint-disable-next-line
   }, []);
 
   if (isLoading) {
@@ -18,8 +19,6 @@ const JobsContainer = () => {
       </div>
     );
   }
-
-  console.log('jobs', jobs)
 
   if (jobs.length === 0) {
     return (

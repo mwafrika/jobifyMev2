@@ -230,7 +230,6 @@ const reducer = (state, action) => {
 
   if (action.type === SET_EDIT_JOB) {
     const job = state.jobs.find((job) => job._id === action.payload.id);
-    console.log(state.jobs, "check job status");
     const { jobLocation, jobType, status, company, position, _id } = job;
     return {
       ...state,
