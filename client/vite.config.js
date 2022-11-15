@@ -6,7 +6,15 @@ export default defineConfig({
   server: {
     // proxy: "",  proxy to backend server
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        parserOpts: {
+          plugins: ["decorators-legacy"],
+        },
+      },
+    }),
+  ],
   build: {
     rollupOptions: {
       external: ["react", "react-dom", "react-is"],
