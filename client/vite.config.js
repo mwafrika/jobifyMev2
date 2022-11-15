@@ -15,5 +15,6 @@ export default defineConfig({
         "react-is",
       ],
     },
+    chunkSizeWarningLimit: 1600, // suppress warning
   },
 });
