@@ -10,8 +10,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
-        "react", // ignore react stuff
-        "react-dom",
+        // "react",
+        // "react-dom",
         "react-is",
       ],
     },
