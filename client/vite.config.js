@@ -6,7 +6,16 @@ export default defineConfig({
   server: {
     // proxy: "",  proxy to backend server
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ["@babel/plugin-proposal-decorators", { legacy: true }],
+          ["@babel/plugin-proposal-class-properties", { loose: true }],
+        ],
+      },
+    }),
+  ],
   build: {
     rollupOptions: {
       external: [
