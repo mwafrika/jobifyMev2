@@ -1,1 +1,1 @@
-# Huntify using styled-component and React.js
+# Huntify App using styled-component and React.js
