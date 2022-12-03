@@ -10,4 +10,10 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1600, // suppress warning
   },
+  resolve: {
+    alias: {
+      react: "https://cdn.skypack.dev/react",
+      "react-dom": "https://cdn.skypack.dev/react-dom",
+    },
+  },
 });
