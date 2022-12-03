@@ -66,11 +66,11 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const url =
-    process.env.NODE_ENV === "production" ? "/" : "http://localhost:7000/";
+  // const url =
+  //   process.env.NODE_ENV === "production" ? "/" : "http://localhost:7000/";
 
   const authFetch = axios.create({
-    baseURL: `${url}api/v1/`,
+    baseURL: `${process.env.PROD_URL}/api/v1/`,
     headers: {
       Authorization: `Bearer ${state.token}`,
     },
