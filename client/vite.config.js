@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import path from "path";
+
 //import reactRefresh from '@vitejs/plugin-react-refresh'
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,7 +17,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      react: "https://unpkg.com/react@18/umd/react.production.min.js",
+      "react-dom":
+        "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js",
     },
   },
 });
