@@ -286,7 +286,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === SHOW_STATS_SUCCESS) {
-    console.log(action.payload);
     return {
       ...state,
       isLoading: false,
