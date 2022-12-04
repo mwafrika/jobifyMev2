@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import reactRefresh from "@vitejs/plugin-react";
 import svgrPlugin from "vite-plugin-svgr";
+import react from "@vitejs/plugin-react"; // added
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,16 +10,30 @@ export default defineConfig({
   build: {
     outDir: "dist",
     chunkSizeWarningLimit: 1600, // suppress warning
+    // rollupOptions: {
+    //   external: ["react-is", "styled-components", "react", "react-dom"],
+    // },
   },
   plugins: [
-    reactRefresh(),
-    svgrPlugin({
-      svgrOptions: {
-        icon: true,
-        // ...svgr options (https://react-svgr.com/docs/options/)
+    react({
+      babel: {
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            { ssr: false, pure: true, displayName: true, fileName: false },
+          ],
+        ],
       },
     }),
   ],
+  // plugins: [
+  //   reactRefresh(),
+  //   svgrPlugin({
+  //     svgrOptions: {
+  //       icon: true,
+  //     },
+  //   }),
+  // ],
 });
 
 // import { defineConfig } from "vite";
