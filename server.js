@@ -21,7 +21,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, "./client/dist", "index.html")));
+app.use(express.static(path.resolve(__dirname, "./client/dist/")));
 app.use(cors());
 app.use(express.json());
 
