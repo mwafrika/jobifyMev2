@@ -11,7 +11,7 @@ export default defineConfig({
     outDir: "dist",
     chunkSizeWarningLimit: 1600, // suppress warning
     // rollupOptions: {
-    //   external: ["react-is", "styled-components", "react", "react-dom"],
+    //   external: ["react", "react-dom", "react-is"],
     // },
   },
   plugins: [
