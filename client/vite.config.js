@@ -27,7 +27,7 @@ export default defineConfig({
   base: "/client/",
   build: {
     rollupOptions: {
-      external: ["react", "react-dom", "react-router-dom"],
+      external: ["react", "react-dom", "react-router-dom", "react-is"],
     },
     chunkSizeWarningLimit: 1600, // suppress warning
   },
