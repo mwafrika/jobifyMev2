@@ -44,6 +44,7 @@
     "mongoose": "^6.7.0",
     "morgan": "^1.10.0",
     "validator": "^13.7.0",
+    "vite-plugin-svgr": "^2.2.2",
     "xss-clean": "^0.1.1"
   }
 }
