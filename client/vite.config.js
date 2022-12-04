@@ -6,12 +6,12 @@ export default defineConfig({
   define: {
     "process.env": {},
   },
-  // build: {
-  //   rollupOptions: {
-  //     external: ["react", "react-dom", "react-is"],
-  //   },
-  //   chunkSizeWarningLimit: 1600, // suppress warning
-  // },
+  build: {
+    rollupOptions: {
+      external: ["react", "react-dom", "react-is"],
+    },
+    chunkSizeWarningLimit: 1600, // suppress warning
+  },
   // resolve: {
   //   alias: {
   //     react: "https://cdn.skypack.dev/react",
