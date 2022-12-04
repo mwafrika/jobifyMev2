@@ -21,7 +21,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, "client/dist", "index.html")));
+app.use(express.static(path.resolve(__dirname, "./client/dist", "index.html")));
 app.use(cors());
 app.use(express.json());
 
@@ -37,7 +37,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", auth, jobRoutes);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client/dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
   // res.send({
   //   message: "Welcome to huntify api",
   // });
