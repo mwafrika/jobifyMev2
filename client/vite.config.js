@@ -7,9 +7,9 @@ export default defineConfig({
     "process.env": {},
   },
   build: {
-    rollupOptions: {
-      external: ["react", "react-dom", "react-is"],
-    },
+    // rollupOptions: {
+    //   external: ["react", "react-dom", "react-is"],
+    // },
     chunkSizeWarningLimit: 1600, // suppress warning
   },
   // resolve: {
