@@ -36,7 +36,7 @@ const Landing = () => {
         </div>
 
         <div className="slide-container">
-          <Fade arrows={false} autoplay={true} duration={3000}>
+          <Fade arrows={false} autoplay={true} duration={5000}>
             <div className="each-fade">
               <img src={images[0]} />
             </div>
