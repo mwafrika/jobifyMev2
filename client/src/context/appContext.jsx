@@ -70,7 +70,7 @@ const AppProvider = ({ children }) => {
     process.env.NODE_ENV === "production" ? "/" : "http://localhost:7000/";
 
   const authFetch = axios.create({
-    baseURL: `${url}api/v1/`,
+    baseURL: `http://localhost:7000/api/v1`,
     headers: {
       Authorization: `Bearer ${state.token}`,
     },

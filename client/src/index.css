@@ -291,7 +291,9 @@ ul {
 .container {
   width: var(--fluid-width);
   max-width: var(--max-width);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: -3rem; */
 }
 .full-page {
   min-height: 100vh;

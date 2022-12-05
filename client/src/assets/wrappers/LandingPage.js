@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.main`
   nav {
@@ -11,9 +11,12 @@ const Wrapper = styled.main`
   }
   .page {
     min-height: calc(100vh - var(--nav-height));
-    display: grid;
-    align-items: center;
+    /* display: grid;
+    align-items: center; */
+    display: flex;
+    overflow: hidden;
     margin-top: -3rem;
+    //
   }
   h1 {
     font-weight: 700;
@@ -27,14 +30,35 @@ const Wrapper = styled.main`
   .main-img {
     display: none;
   }
+  .slide-container {
+    width: 45vw;
+  }
+  .slide-container img {
+    width: 100%;
+  }
   @media (min-width: 992px) {
     .page {
-      grid-template-columns: 1fr 1fr;
+      /* grid-template-columns: 1fr 1fr; */
+      display: flex;
       column-gap: 3rem;
+      align-items: center;
     }
     .main-img {
-      display: block;
+      /* display: block; */
+      display: flex;
+      flex-direction: row;
     }
   }
-`
-export default Wrapper
+  @media (max-width: 992px) {
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 6rem;
+    }
+    .info {
+      margin-top: 6rem;
+    }
+  }
+`;
+export default Wrapper;
