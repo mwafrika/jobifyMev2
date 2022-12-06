@@ -38,9 +38,6 @@ app.use("/api/v1/jobs", auth, jobRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
-  // res.send({
-  //   message: "Welcome to huntify api",
-  // });
 });
 
 app.use(notFoundMiddleware);
