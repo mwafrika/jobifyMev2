@@ -3,8 +3,8 @@ import styled from "styled-components";
 const Wrapper = styled.article`
   background: var(--white);
   border-radius: var(--borderRadius);
-  display: grid;
-  grid-template-rows: 1fr auto;
+  /* display: grid;
+  grid-template-rows: 1fr auto; */
   box-shadow: var(--shadow-2);
 
   header {

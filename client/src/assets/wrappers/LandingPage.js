@@ -40,7 +40,7 @@ const Wrapper = styled.main`
     .page {
       /* grid-template-columns: 1fr 1fr; */
       display: flex;
-      column-gap: 3rem;
+      column-gap: 2rem;
       align-items: center;
     }
     .main-img {
