@@ -74,7 +74,9 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const url =
-    process.env.NODE_ENV === "production" ? "/" : "http://localhost:7000/";
+    process.env.NODE_ENV === "production"
+      ? "https://huntify-api.onrender.com/"
+      : "http://localhost:7000/";
 
   const authFetch = axios.create({
     baseURL: `${url}api/v1`,
