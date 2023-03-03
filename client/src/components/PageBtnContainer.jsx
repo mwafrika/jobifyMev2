@@ -8,16 +8,24 @@ import {
 import Wrapper from "../assets/wrappers/PageBtnContainer";
 
 const PageBtnContainer = () => {
-  const { page, numOfPages } = useAppContext();
+  const { page, numOfPages, changePage } = useAppContext();
 
   const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
-  console.log("pages", pages);
+
   const nextPage = () => {
-    console.log("nextPage");
+    let newPage = page + 1;
+    if (newPage > numOfPages) {
+      newPage = 1;
+    }
+    changePage(newPage);
   };
 
   const previousPage = () => {
-    console.log("previousPage");
+    let newPage = page - 1;
+    if (newPage < 1) {
+      newPage = numOfPages;
+    }
+    changePage(newPage);
   };
 
   return (
@@ -33,7 +41,7 @@ const PageBtnContainer = () => {
               type="button"
               className={pageNumber === page ? "pageBtn active" : "pageBtn"}
               key={pageNumber}
-              onClick={() => console.log("pageNumber", pageNumber)}
+              onClick={() => changePage(pageNumber)}
             >
               {pageNumber}
             </button>
