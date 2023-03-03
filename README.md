@@ -13,18 +13,26 @@
 - MongoDB
 - Node.js
 
+## Login
+
+- email: `mwafrika@gmail`
+- password: `123456`
+
 ## Live Demo
 
-### [Live Demo](https://huntify-me.onrender.com)
+### [Netlify](https://huntify.netlify.app)
+### [Render](https://huntify-me.onrender.com)
 
-## Getting Started
 
-You can create your own account and login to the system, use the below credentials to test the app or create a new account
-
-### Login:
-   
-   - email: mwafrika@gmail.com
-   - password: 123456
+## Screenshots
+### 1. Homepage
+![screenshot](./client/src/assets/images/homepage.png)
+### 2. All jobs with pagination and filters
+![screenshot](./client/src/assets/images/alljobs.png)
+### 3. Add a new job
+![screenshot](./client/src/assets/images/addjob.png)
+### 4. User Profile
+![screenshot](./client/src/assets/images/userprofile.png)
 
 ## Author
 
@@ -33,7 +41,7 @@ You can create your own account and login to the system, use the below credentia
 - GitHub: [@mwafrika](https://github.com/mwafrika)
 - Twitter: [@mwafrika](@mwafrikamufung1)
 - LinkedIn: [Mwafrika Mufungizi](https://www.linkedin.com/in/mwafrika-mufungizi/)
-- Portfolio: [Mwafrika Portfolio](https://mwafrika-ky6x.onrender.com/)
+- Portfolio: [Mwafrika](https://mwafrika.netlify.app/)
 
 ## Show your support
 
