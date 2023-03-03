@@ -28,6 +28,7 @@ import {
   EDIT_JOB_ERROR,
   SHOW_STATS_START,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from "./actions";
 import axios from "axios";
 
@@ -294,8 +295,15 @@ const AppProvider = ({ children }) => {
       type: GET_JOBS_START,
     });
 
+    const { search, searchStatus, searchType, sort } = state;
+
+    let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
+
     try {
-      const { data } = await authFetch.get("/jobs");
+      const { data } = await authFetch.get(url);
       const { jobs, numOfPages, totalJobs } = data;
       dispatch({
         type: GET_JOBS_SUCCESS,
@@ -382,7 +390,9 @@ const AppProvider = ({ children }) => {
   };
 
   const clearFilters = () => {
-    console.log("clear filters");
+    dispatch({
+      type: CLEAR_FILTERS,
+    });
   };
 
   return (

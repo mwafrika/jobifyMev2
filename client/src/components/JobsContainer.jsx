@@ -5,12 +5,22 @@ import Job from "./Job";
 import Loading from "./Loading";
 
 const JobsContainer = () => {
-  const { getJobs, jobs, isLoading, page, totalJobs } = useAppContext();
+  const {
+    getJobs,
+    jobs,
+    isLoading,
+    page,
+    totalJobs,
+    search,
+    searchStatus,
+    searchType,
+    sort,
+  } = useAppContext();
 
   useEffect(() => {
     getJobs();
     // eslint-disable-next-line
-  }, []);
+  }, [search, searchStatus, searchType, sort]);
 
   if (isLoading) {
     return (

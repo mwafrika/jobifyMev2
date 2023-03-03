@@ -25,6 +25,12 @@ const SearchContainer = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // if (isLoading) return;
+    clearFilters();
+  };
+
   return (
     <Wrapper>
       <form className="form">
@@ -36,6 +42,34 @@ const SearchContainer = () => {
             value={search}
             onChange={handleSearch}
           />
+          <FormRowSelect
+            name="searchStatus"
+            value={searchStatus}
+            onChange={handleSearch}
+            labelText="status"
+            list={["all", ...statusOptions]}
+          />
+          <FormRowSelect
+            name="searchType"
+            value={searchType}
+            onChange={handleSearch}
+            labelText="type"
+            list={["all", ...jobTypeOptions]}
+          />
+          <FormRowSelect
+            name="sort"
+            value={sort}
+            onChange={handleSearch}
+            list={sortOptions}
+          />
+          <button
+            type="button"
+            className="btn btn-block btn-danger"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
+            {isLoading ? "Loading..." : "Clear filters"}
+          </button>
         </div>
       </form>
     </Wrapper>
