@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
 
   const url =
     process.env.NODE_ENV === "production"
-      ? "https://huntify-api.onrender.com/"
+      ? "https://huntify-api.vercel.app/"
       : "http://localhost:7000/";
 
   const authFetch = axios.create({
