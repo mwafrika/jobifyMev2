@@ -22,7 +22,16 @@ dotenv.config();
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "./client/dist/")));
-app.use(cors());
+if (process.env.NODE_ENV !== "production") {
+  app.use(cors()); 
+} else {
+  app.use(
+    cors({
+      origin: process.env.FRONTEND_URL || "https://jobify-mev2.vercel.app",
+      credentials: true,
+    })
+  );
+}
 app.use(express.json());
 
 app.use(helmet());
