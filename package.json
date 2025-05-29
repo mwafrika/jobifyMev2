@@ -10,7 +10,7 @@
     "client": "npm run dev --prefix client",
     "clientinstall": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "vercel-build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build -- prefix client"
+    "render-build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build -- prefix client"
   },
   "repository": {
     "type": "git",
