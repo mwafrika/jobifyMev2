@@ -26,12 +26,10 @@ I designed and implemented the application, including:
 
 ## Tech Stack
 
-- React
-- Node.js
-- Express
-- MongoDB / Mongoose
-- Context API
-- Styled Components
+- **Language:** JavaScript
+- **Frontend:** React, Context API, Styled Components
+- **Backend:** Node.js, Express
+- **Database:** MongoDB, Mongoose
 
 ## Architecture
 
