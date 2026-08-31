@@ -20,8 +20,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 dotenv.config();
 const app = express();
-
-app.use(express.static(path.resolve(__dirname, "./client/dist/")));
+// we will need this if we need to manage all deployments on render (currently we moved frontend to vercel)
+// app.use(express.static(path.resolve(__dirname, "./client/dist/")));
 if (process.env.NODE_ENV !== "production") {
   app.use(cors()); 
 } else {
@@ -44,9 +44,15 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/jobs", auth, jobRoutes);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+// we will need this if we need to manage all deployments on render (currently we moved frontend to vercel)
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+// });
+// This is the main entry point for the server (to be removed if everything is on the same server)
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to the Jobify API",
+  });
 });
 
 app.use(notFoundMiddleware);
